@@ -7,10 +7,10 @@ class AddFishForm extends React.Component {
   imageRef = React.createRef();
 
   createFish = (event) => {
-    //1. stop default from submiting
+    //1. stop default form from submiting
     event.preventDefault();
 
-    //2.
+    //2. collect form data into an object 
     const fish = {
       name: this.nameRef.current.value,
       price: parseFloat(this.priceRef.current.value),
@@ -20,8 +20,11 @@ class AddFishForm extends React.Component {
     };
 
     //console.log(fish);
-
+    //3. send to the app component in storre in state
     this.props.addFish(fish);
+
+    //4. reset the form
+    event.currentTarget.reset();
   };
 
   render() {
