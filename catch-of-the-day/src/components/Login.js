@@ -2,14 +2,8 @@ import React from "react";
 
 const Login = (props) => (
   <nav className="Login">
-    <h2>Inventory Login</h2>
-    <p>Sign In to manage Your Store's Inventory</p>
-    
-    <button
-      className="github"
-      onClick={() => props.authenticate("Github")}
-    >
-      Login with Github
+    <button className="mybutton" onClick={() => props.authenticate("Github")}>
+      GITHUB
     </button>
   </nav>
 );

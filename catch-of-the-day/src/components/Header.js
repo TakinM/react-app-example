@@ -1,14 +1,22 @@
 import React from "react";
+import App from "./App";
 
 function Header(props) {
   return (
     <header className="top">
       <div className="user_saves">
-        <div className="search"></div>
+        {props.loggedIn ? <div></div> : <div className="search"></div>}
+
         <div>
           <h1>LIBRARY</h1>
         </div>
-        <div className="filter"></div>
+        {props.loggedIn ? (
+          <button className="icon_button">
+            <div className="edit" onClick></div>
+          </button>
+        ) : (
+          <div className="filter"></div>
+        )}
       </div>
     </header>
   );

@@ -291,6 +291,12 @@ h6 {
 *::after {
   box-sizing: border-box;
 }
+.icon_button {
+  border: none;
+}
+.icon_button:hover {
+  all: none;
+}
 .user_saves {
   display: -webkit-box;
   display: flex;
@@ -307,6 +313,12 @@ h6 {
 }
 .user_saves .filter {
   background: url("images/filter.svg") center no-repeat;
+  background-size: contain;
+  height: 30px;
+  width: 30px;
+}
+.user_saves .edit {
+  background: url("images/edit.svg") center no-repeat;
   background-size: contain;
   height: 30px;
   width: 30px;
@@ -545,8 +557,8 @@ ul.order li span.count span {
   margin-top: 30px;
 }
 .menu .fishes li {
-  margin-bottom: 30px;
-  width: calc(50% - 10px);
+  margin-bottom: 70px;
+  width: calc(45% - 5px);
 }
 .menu .fishes li .books {
   background-repeat: no-repeat;
@@ -652,43 +664,6 @@ input[type=submit].warning:after {
 button.success:after,
 input[type=submit].success:after {
   background: #2dc22d;
-}
-button.github,
-input[type=submit].github,
-button.facebook,
-input[type=submit].facebook,
-button.twitter,
-input[type=submit].twitter {
-  border: 0;
-  display: block;
-  margin-bottom: 2rem;
-  width: 100%;
-  color: #fff;
-  padding: 2rem;
-}
-button.github,
-input[type=submit].github {
-  background: #82d465;
-}
-button.github:after,
-input[type=submit].github:after {
-  background: #5cc437;
-}
-button.facebook,
-input[type=submit].facebook {
-  background: #3864a3;
-}
-button.facebook:after,
-input[type=submit].facebook:after {
-  background: #2d5082;
-}
-button.twitter,
-input[type=submit].twitter {
-  background: #5ea9dd;
-}
-button.twitter:after,
-input[type=submit].twitter:after {
-  background: #2c8dd0;
 }
 .account_panel {
   padding: 0;

@@ -19,7 +19,7 @@ class Order extends React.Component {
 
     return (
       <li key={key}>
-        {count} lbs {fish.name} {formatPrice(count * fish.price)}
+        {count} Hard copy of {fish.name} {formatPrice(count * fish.price)}
         <button onClick={() => this.props.removeFromOrder(key)}>&times;</button>
       </li>
     );
@@ -43,20 +43,26 @@ class Order extends React.Component {
     return (
       <div className="order-wrap">
         <h1>CART</h1>
-        <div className="empty_text">
-          <h2>
-            You presently do not have any books in your cart! Click on the
-            <h2 className="cart_icon">ADD TO CART BUTTON</h2>
-            to add books you are interested in purchasing!
-          </h2>
-        </div>
-        {/*<h2>You want to buy ... books!</h2>
-       <ul className="order">{orderIds.map(this.renderOrder)}</ul>*/}
 
-        {/*<div className="total">
-          Total Cost:
-          <strong>{formatPrice(total)}</strong>
-    </div>*/}
+        {this.Order ? (
+          <div className="empty_text">
+            <h2>
+              You presently do not have any books in your cart! Click on the
+              <h2 className="cart_icon">ADD TO CART BUTTON</h2>
+              to add books you are interested in purchasing!
+            </h2>
+          </div>
+        ) : (
+          <div>
+            <h2>These are the books you are interested in buying!</h2>
+            <ul className="order">{orderIds.map(this.renderOrder)}</ul>
+
+            <div className="total">
+              Total Cost:
+              <strong>{formatPrice(total)}</strong>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

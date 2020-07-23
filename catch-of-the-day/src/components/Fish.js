@@ -25,7 +25,9 @@ class Fish extends React.Component {
 
             <div className="user_saves">
               <h3 className="price">{formatPrice(price)}</h3>
-              <div className="heart_click"></div>
+              <button className="icon_button">
+                <div className="heart_click"></div>
+              </button>
             </div>
 
             <button disabled={!isAvailable} onClick={this.handleClick}>

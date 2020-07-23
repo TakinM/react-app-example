@@ -5,12 +5,15 @@ import Inventory from "./Inventory";
 import sampleFishes from "../sample-fishes";
 import Fish from "./Fish";
 import base from "../base";
+import AddFishForm from "./AddFishForm";
 import EditFishForm from "./EditFishForm";
 
 class App extends React.Component {
   state = {
     fishes: {},
     order: {},
+    loggedIn: false,
+    editing: false,
   };
 
   componentDidMount() {
@@ -41,6 +44,11 @@ class App extends React.Component {
   componentWillUnmount() {
     base.removeBinding(this.ref);
   }
+
+  handleLoggedInState = (state) => {
+    //alert("working");
+    this.setState({ loggedIn: state });
+  };
 
   addFish = (fish) => {
     console.log(fish);
@@ -113,17 +121,35 @@ class App extends React.Component {
 
         <div className="catch-of-the-day">
           <div className="menu">
-            <Header tagline="Fresh Seafood Market" />
-            <ul className="fishes">
-              {Object.keys(this.state.fishes).map((key) => (
-                <Fish
-                  key={key}
-                  index={key}
-                  details={this.state.fishes[key]}
-                  addToOrder={this.addToOrder}
-                />
-              ))}
-            </ul>
+            <Header loggedIn={this.state.loggedIn} />
+            {this.state.loggedIn && this.state.editing ? (
+              <div className="edit_products">
+                {Object.keys(this.state.fishes).map((key) => (
+                  <EditFishForm
+                    key={key}
+                    index={key}
+                    fish={this.state.fishes[key]}
+                    updateFish={this.updateFish}
+                    deleteFish={this.deleteFish}
+                  />
+                ))}
+                <AddFishForm addFish={this.addFish} />
+                <button onClick={this.loadSampleFishes}>
+                  Load Sample Fishes
+                </button>
+              </div>
+            ) : (
+              <ul className="fishes">
+                {Object.keys(this.state.fishes).map((key) => (
+                  <Fish
+                    key={key}
+                    index={key}
+                    details={this.state.fishes[key]}
+                    addToOrder={this.addToOrder}
+                  />
+                ))}
+              </ul>
+            )}
           </div>
           <Order
             fishes={this.state.fishes}
@@ -131,12 +157,9 @@ class App extends React.Component {
             removeFromOrder={this.removeFromOrder}
           />
           <Inventory
-            addFish={this.addFish}
-            updateFish={this.updateFish}
-            deleteFish={this.deleteFish}
-            loadSampleFishes={this.loadSampleFishes}
-            fish={this.state.fishes}
+            loggedIn={this.state.loggedIn}
             storeId={this.props.match.params.storeId}
+            handleLoggedInState={this.handleLoggedInState}
           />
         </div>
       </div>

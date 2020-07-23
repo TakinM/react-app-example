@@ -1,6 +1,4 @@
 import React from "react";
-import AddFishForm from "./AddFishForm";
-import EditFishForm from "./EditFishForm";
 import Login from "./Login";
 import firebase from "firebase";
 import base, { firebaseApp } from "../base";
@@ -20,6 +18,7 @@ class Inventory extends React.Component {
   }
 
   authHandler = async (authData) => {
+    const _this = this;
     //1. look up the current store in firebase database
     const store = await base.fetch(this.props.storeId, { context: this });
     console.log(store);
@@ -35,10 +34,15 @@ class Inventory extends React.Component {
     }
 
     //3. set the state of the inventory component to reflect the current user
-    this.setState({
-      uid: authData.user.uid,
-      owner: store.owner || authData.user.uid,
-    });
+    this.setState(
+      {
+        uid: authData.user.uid,
+        owner: store.owner || authData.user.uid,
+      },
+      function () {
+        _this.props.handleLoggedInState(true);
+      }
+    );
 
     console.log(authData);
   };
@@ -49,28 +53,22 @@ class Inventory extends React.Component {
   };
 
   logout = async () => {
+    const _this = this;
     console.log("logged out!");
     await firebase.auth().signOut();
-    this.setState({ uid: null });
+    this.setState({ uid: null }, function () {
+      _this.props.handleLoggedInState(false);
+    });
   };
 
   render() {
-    const logout = <button onClick={this.logout}>Log Out</button>;
+    const logout = (
+      <button onClick={this.logout} className="mybutton">
+        Log Out
+      </button>
+    );
 
     //1. check if they logged in
-    if (!this.state.uid) {
-      return <Login authenticate={this.authenticate} />;
-    }
-
-    //2. check if they are the owner of the store
-    if (this.state.uid !== this.state.owner) {
-      return (
-        <div>
-          <p>Sorry you are not the owner of this store</p>
-          {logout}
-        </div>
-      );
-    }
 
     //3. they are the owner, show the inventory
 
@@ -78,30 +76,26 @@ class Inventory extends React.Component {
       <div className="account_panel">
         {/*
          <h2>Inventory</h2>
-        {Object.keys(this.props.fish).map((key) => (
-          <EditFishForm
-            key={key}
-            index={key}
-            fish={this.props.fish[key]}
-            updateFish={this.props.updateFish}
-            deleteFish={this.props.deleteFish}
-          />
-        ))}
+        
 
-        <AddFishForm addFish={this.props.addFish} />
-        <button onClick={this.props.loadSampleFishes}>
-          Load Sample Fishes
-        </button>
+        
         */}
         <div className="admin_view">
           <h4>Books are the gateway to the soul</h4>
           <h2 className="profile">ADMIN LOGIN</h2>
 
-          <button className="mybutton">GitHub</button>
-          <br />
-          <br />
-          <button className="mybutton">Google</button>
-          {/*{logout}*/}
+          {!this.state.uid ? (
+            <Login authenticate={this.authenticate} />
+          ) : (
+            logout
+          )}
+
+          {this.state.uid !== this.state.owner ? (
+            <div>
+              <p>Sorry you are not the owner of this store</p>
+              {logout}
+            </div>
+          ) : null}
         </div>
         <div className="wishlist_view">
           <h6>WISHLIST</h6>
