@@ -1,22 +1,11 @@
 import React from "react";
 
-
-function Header (props){
-  return(
+function Header(props) {
+  return (
     <header className="top">
-        <h1>
-          Catch
-          <span className="ofThe">
-            <span className="of"> Of </span> <span className="the">The</span>
-          </span>
-          DAY
-        </h1>
-        <h3 className="tagline">
-          <span> {props.tagline} </span>
-        </h3>
-      </header>
-  )
-};
-
+      <h1>LIBRARY</h1>
+    </header>
+  );
+}
 
 export default Header;

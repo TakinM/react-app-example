@@ -106,33 +106,39 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="catch-of-the-day">
-        <div className="menu">
-          <Header tagline="Fresh Seafood Market" />
-          <ul className="fishes">
-            {Object.keys(this.state.fishes).map((key) => (
-              <Fish
-                key={key}
-                index={key}
-                details={this.state.fishes[key]}
-                addToOrder={this.addToOrder}
-              />
-            ))}
-          </ul>
+      <div>
+        <div className="logo_holder">
+          <img className="site_logo" src="/images/logo.svg" />
         </div>
-        <Order
-          fishes={this.state.fishes}
-          order={this.state.order}
-          removeFromOrder={this.removeFromOrder}
-        />
-        <Inventory
-          addFish={this.addFish}
-          updateFish={this.updateFish}
-          deleteFish={this.deleteFish}
-          loadSampleFishes={this.loadSampleFishes}
-          fish={this.state.fishes}
-          storeId={this.props.match.params.storeId}
-        />
+
+        <div className="catch-of-the-day">
+          <div className="menu">
+            <Header tagline="Fresh Seafood Market" />
+            <ul className="fishes">
+              {Object.keys(this.state.fishes).map((key) => (
+                <Fish
+                  key={key}
+                  index={key}
+                  details={this.state.fishes[key]}
+                  addToOrder={this.addToOrder}
+                />
+              ))}
+            </ul>
+          </div>
+          <Order
+            fishes={this.state.fishes}
+            order={this.state.order}
+            removeFromOrder={this.removeFromOrder}
+          />
+          <Inventory
+            addFish={this.addFish}
+            updateFish={this.updateFish}
+            deleteFish={this.deleteFish}
+            loadSampleFishes={this.loadSampleFishes}
+            fish={this.state.fishes}
+            storeId={this.props.match.params.storeId}
+          />
+        </div>
       </div>
     );
   }

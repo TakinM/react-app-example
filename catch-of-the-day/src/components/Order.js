@@ -42,13 +42,21 @@ class Order extends React.Component {
 
     return (
       <div className="order-wrap">
-        <h2>Order</h2>
-        <ul className="order">{orderIds.map(this.renderOrder)}</ul>
-
-        <div className="total">
-          Total:
-          <strong>{formatPrice(total)}</strong>
+        <h1>CART</h1>
+        <div className="empty_text">
+          <h2>
+            You presently do not have any books in your cart! Click on the
+            <div className="cart_icon"></div>
+            to add books you are interested in purchasing!
+          </h2>
         </div>
+        {/*<h2>You want to buy ... books!</h2>
+       <ul className="order">{orderIds.map(this.renderOrder)}</ul>*/}
+
+        {/*<div className="total">
+          Total Cost:
+          <strong>{formatPrice(total)}</strong>
+    </div>*/}
       </div>
     );
   }

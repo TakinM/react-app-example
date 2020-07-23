@@ -75,10 +75,9 @@ class Inventory extends React.Component {
     //3. they are the owner, show the inventory
 
     return (
-      <div className="order">
-        <h2>Inventory</h2>
-        {logout}
-
+      <div className="account_panel">
+        {/*
+         <h2>Inventory</h2>
         {Object.keys(this.props.fish).map((key) => (
           <EditFishForm
             key={key}
@@ -93,6 +92,27 @@ class Inventory extends React.Component {
         <button onClick={this.props.loadSampleFishes}>
           Load Sample Fishes
         </button>
+        */}
+        <div className="admin_view">
+          <h4>Books are the gateway to the soul</h4>
+          <h2 className="profile">ADMIN LOGIN</h2>
+          <button className="mybutton">GitHub</button>
+          {/*{logout}*/}
+        </div>
+        <div className="wishlist_view">
+          <div className="user_saves">
+            <h6>WISHLIST</h6>
+            <p>WAIT LIST</p>
+          </div>
+          <div className="empty_text">
+            <h2>
+              You presently do not have any books in your wish list! Click on
+              the
+              <div className="heart_icon"></div>
+              to add books you are interested in saving for later!
+            </h2>
+          </div>
+        </div>
       </div>
     );
   }
