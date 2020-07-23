@@ -50,7 +50,7 @@ class Inventory extends React.Component {
 
   logout = async () => {
     console.log("logged out!");
-    await firebase.auth().signOut;
+    await firebase.auth().signOut();
     this.setState({ uid: null });
   };
 
@@ -96,14 +96,16 @@ class Inventory extends React.Component {
         <div className="admin_view">
           <h4>Books are the gateway to the soul</h4>
           <h2 className="profile">ADMIN LOGIN</h2>
+
           <button className="mybutton">GitHub</button>
+          <br />
+          <br />
+          <button className="mybutton">Google</button>
           {/*{logout}*/}
         </div>
         <div className="wishlist_view">
-          <div className="user_saves">
-            <h6>WISHLIST</h6>
-            <p>WAIT LIST</p>
-          </div>
+          <h6>WISHLIST</h6>
+
           <div className="empty_text">
             <h2>
               You presently do not have any books in your wish list! Click on

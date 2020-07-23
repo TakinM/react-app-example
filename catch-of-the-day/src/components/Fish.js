@@ -15,19 +15,26 @@ class Fish extends React.Component {
 
     return (
       <li>
-        <div>
-          <div className="books" style={imgStyle(image)}></div>
+        <div className="books_cover">
+          <div>
+            <div className="books" style={imgStyle(image)}></div>
+          </div>
+          <div className="book_details">
+            <h3 className="fish-name">{name}</h3>
+            <h5>{desc}</h5>
+
+            <div className="user_saves">
+              <h3 className="price">{formatPrice(price)}</h3>
+              <div className="heart_click"></div>
+            </div>
+
+            <button disabled={!isAvailable} onClick={this.handleClick}>
+              {isAvailable ? "Add To Cart" : "Presently Unavaliable"}
+            </button>
+          </div>
         </div>
 
         {/*<img src={image} alt={name} />*/}
-        <h3 className="fish-name">
-          {name}
-          <span className="price">{formatPrice(price)}</span>
-        </h3>
-        <h5>{desc}</h5>
-        <button disabled={!isAvailable} onClick={this.handleClick}>
-          {isAvailable ? "Add To Order" : "Sold Out!"}
-        </button>
       </li>
     );
   }

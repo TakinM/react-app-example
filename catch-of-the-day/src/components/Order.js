@@ -46,7 +46,7 @@ class Order extends React.Component {
         <div className="empty_text">
           <h2>
             You presently do not have any books in your cart! Click on the
-            <div className="cart_icon"></div>
+            <h2 className="cart_icon">ADD TO CART BUTTON</h2>
             to add books you are interested in purchasing!
           </h2>
         </div>
