@@ -14,6 +14,7 @@ class App extends React.Component {
     order: {},
     loggedIn: false,
     editing: false,
+    wishlist: {},
   };
 
   componentDidMount() {
@@ -21,10 +22,19 @@ class App extends React.Component {
 
     //first resinate our localStorage
     const localStorageRef = localStorage.getItem(params.storeId);
+    const localStorageRefWishlist = localStorage.getItem(
+      params.storeId + "wishlist"
+    );
 
     if (localStorageRef) {
       this.setState({
         order: JSON.parse(localStorageRef),
+      });
+    }
+
+    if (localStorageRefWishlist) {
+      this.setState({
+        wishlist: JSON.parse(localStorageRefWishlist),
       });
     }
 
@@ -38,6 +48,10 @@ class App extends React.Component {
     localStorage.setItem(
       this.props.match.params.storeId,
       JSON.stringify(this.state.order)
+    );
+    localStorage.setItem(
+      this.props.match.params.storeId + "wishlist",
+      JSON.stringify(this.state.wishlist)
     );
   }
 
@@ -101,6 +115,10 @@ class App extends React.Component {
     this.setState({ order });
   };
 
+  setEditing = (value) => {
+    this.setState({ editing: value });
+  };
+
   removeFromOrder = (key) => {
     //1. take a copy of state
     const order = { ...this.state.order };
@@ -112,6 +130,15 @@ class App extends React.Component {
     this.setState({ order });
   };
 
+  //adding to wishlist
+  addToWishlist = (key) => {
+    const wishlist = { ...this.state.wishlist };
+
+    wishlist[key] = true;
+
+    this.setState({ wishlist });
+  };
+
   render() {
     return (
       <div>
@@ -119,49 +146,104 @@ class App extends React.Component {
           <img className="site_logo" src="/images/logo.svg" />
         </div>
 
-        <div className="catch-of-the-day">
-          <div className="menu">
-            <Header loggedIn={this.state.loggedIn} />
-            {this.state.loggedIn && this.state.editing ? (
-              <div className="edit_products">
-                {Object.keys(this.state.fishes).map((key) => (
-                  <EditFishForm
-                    key={key}
-                    index={key}
-                    fish={this.state.fishes[key]}
-                    updateFish={this.updateFish}
-                    deleteFish={this.deleteFish}
-                  />
-                ))}
-                <AddFishForm addFish={this.addFish} />
-                <button onClick={this.loadSampleFishes}>
-                  Load Sample Fishes
-                </button>
-              </div>
-            ) : (
-              <ul className="fishes">
-                {Object.keys(this.state.fishes).map((key) => (
-                  <Fish
-                    key={key}
-                    index={key}
-                    details={this.state.fishes[key]}
-                    addToOrder={this.addToOrder}
-                  />
-                ))}
-              </ul>
-            )}
+        {this.state.loggedIn ? (
+          <div className="adminlog">
+            <div className="menu">
+              <Header
+                loggedIn={this.state.loggedIn}
+                editing={this.state.editing}
+                onEdit={this.setEditing}
+              />
+              {this.state.loggedIn && this.state.editing ? (
+                <div className="edit_products">
+                  {Object.keys(this.state.fishes).map((key) => (
+                    <EditFishForm
+                      key={key}
+                      index={key}
+                      fish={this.state.fishes[key]}
+                      updateFish={this.updateFish}
+                      deleteFish={this.deleteFish}
+                    />
+                  ))}
+                  <AddFishForm addFish={this.addFish} />
+                  <button onClick={this.loadSampleFishes}>
+                    Publish Added Books
+                  </button>
+                </div>
+              ) : (
+                <ul className="fishes">
+                  {Object.keys(this.state.fishes).map((key) => (
+                    <Fish
+                      key={key}
+                      index={key}
+                      details={this.state.fishes[key]}
+                      addToOrder={this.addToOrder}
+                      addToWishlist={this.addToWishlist}
+                    />
+                  ))}
+                </ul>
+              )}
+            </div>
+            <Inventory
+              loggedIn={this.state.loggedIn}
+              storeId={this.props.match.params.storeId}
+              handleLoggedInState={this.handleLoggedInState}
+              wishlist={this.state.wishlist}
+              fishes={this.state.fishes}
+            />
           </div>
-          <Order
-            fishes={this.state.fishes}
-            order={this.state.order}
-            removeFromOrder={this.removeFromOrder}
-          />
-          <Inventory
-            loggedIn={this.state.loggedIn}
-            storeId={this.props.match.params.storeId}
-            handleLoggedInState={this.handleLoggedInState}
-          />
-        </div>
+        ) : (
+          <div className="catch-of-the-day">
+            <div className="menu">
+              <Header
+                loggedIn={this.state.loggedIn}
+                editing={this.state.editing}
+                onEdit={this.setEditing}
+              />
+              {this.state.loggedIn && this.state.editing ? (
+                <div className="edit_products">
+                  {Object.keys(this.state.fishes).map((key) => (
+                    <EditFishForm
+                      key={key}
+                      index={key}
+                      fish={this.state.fishes[key]}
+                      updateFish={this.updateFish}
+                      deleteFish={this.deleteFish}
+                    />
+                  ))}
+                  <AddFishForm addFish={this.addFish} />
+                  <button onClick={this.loadSampleFishes}>
+                    Publish Added Books
+                  </button>
+                </div>
+              ) : (
+                <ul className="fishes">
+                  {Object.keys(this.state.fishes).map((key) => (
+                    <Fish
+                      key={key}
+                      index={key}
+                      details={this.state.fishes[key]}
+                      addToOrder={this.addToOrder}
+                      addToWishlist={this.addToWishlist}
+                    />
+                  ))}
+                </ul>
+              )}
+            </div>
+            <Order
+              fishes={this.state.fishes}
+              order={this.state.order}
+              removeFromOrder={this.removeFromOrder}
+            />
+            <Inventory
+              loggedIn={this.state.loggedIn}
+              storeId={this.props.match.params.storeId}
+              handleLoggedInState={this.handleLoggedInState}
+              wishlist={this.state.wishlist}
+              fishes={this.state.fishes}
+            />
+          </div>
+        )}
       </div>
     );
   }

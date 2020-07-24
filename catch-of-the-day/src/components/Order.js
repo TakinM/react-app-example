@@ -19,7 +19,8 @@ class Order extends React.Component {
 
     return (
       <li key={key}>
-        {count} Hard copy of {fish.name} {formatPrice(count * fish.price)}
+        <b>{count} OF </b> {fish.name}
+        <b> {formatPrice(count * fish.price)}</b>
         <button onClick={() => this.props.removeFromOrder(key)}>&times;</button>
       </li>
     );
@@ -44,7 +45,7 @@ class Order extends React.Component {
       <div className="order-wrap">
         <h1>CART</h1>
 
-        {this.Order ? (
+        {total === 0 ? (
           <div className="empty_text">
             <h2>
               You presently do not have any books in your cart! Click on the
@@ -58,7 +59,7 @@ class Order extends React.Component {
             <ul className="order">{orderIds.map(this.renderOrder)}</ul>
 
             <div className="total">
-              Total Cost:
+              <b> Total Cost:</b>
               <strong>{formatPrice(total)}</strong>
             </div>
           </div>

@@ -2,21 +2,31 @@ import React from "react";
 import App from "./App";
 
 function Header(props) {
+  const isLoggedAndEditing = props.loggedIn && props.editing;
   return (
     <header className="top">
       <div className="user_saves">
-        {props.loggedIn ? <div></div> : <div className="search"></div>}
+        {isLoggedAndEditing && (
+          <>
+            {/* <button className="icon_button">
+              <div className="add"></div>
+        </button>*/}
 
+            <button className="icon_button">
+              <div className="exit" onClick={() => props.onEdit(false)}></div>
+            </button>
+          </>
+        )}
+        {!props.loggedIn && <div className="search"></div>}
         <div>
           <h1>LIBRARY</h1>
         </div>
-        {props.loggedIn ? (
+        {props.loggedIn && !props.editing && (
           <button className="icon_button">
-            <div className="edit" onClick></div>
+            <div className="edit" onClick={() => props.onEdit(true)}></div>
           </button>
-        ) : (
-          <div className="filter"></div>
         )}
+        {!props.loggedIn && <div className="filter"></div>}
       </div>
     </header>
   );

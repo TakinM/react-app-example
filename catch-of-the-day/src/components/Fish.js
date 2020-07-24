@@ -26,11 +26,18 @@ class Fish extends React.Component {
             <div className="user_saves">
               <h3 className="price">{formatPrice(price)}</h3>
               <button className="icon_button">
-                <div className="heart_click"></div>
+                <div
+                  className="heart_click"
+                  onClick={() => this.props.addToWishlist(this.props.index)}
+                ></div>
               </button>
             </div>
 
-            <button disabled={!isAvailable} onClick={this.handleClick}>
+            <button
+              className="cart_button"
+              disabled={!isAvailable}
+              onClick={this.handleClick}
+            >
               {isAvailable ? "Add To Cart" : "Presently Unavaliable"}
             </button>
           </div>

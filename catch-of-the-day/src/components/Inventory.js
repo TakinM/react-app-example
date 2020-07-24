@@ -2,6 +2,8 @@ import React from "react";
 import Login from "./Login";
 import firebase from "firebase";
 import base, { firebaseApp } from "../base";
+import Fish from "./Fish";
+import _ from "lodash";
 
 class Inventory extends React.Component {
   state = {
@@ -74,12 +76,6 @@ class Inventory extends React.Component {
 
     return (
       <div className="account_panel">
-        {/*
-         <h2>Inventory</h2>
-        
-
-        
-        */}
         <div className="admin_view">
           <h4>Books are the gateway to the soul</h4>
           <h2 className="profile">ADMIN LOGIN</h2>
@@ -97,17 +93,32 @@ class Inventory extends React.Component {
             </div>
           ) : null}
         </div>
+
         <div className="wishlist_view">
           <h6>WISHLIST</h6>
 
-          <div className="empty_text">
-            <h2>
-              You presently do not have any books in your wish list! Click on
-              the
-              <div className="heart_icon"></div>
-              to add books you are interested in saving for later!
-            </h2>
-          </div>
+          {this.props.wishlist && !_.isEmpty(this.props.fishes) ? (
+            <ul className="fishes wishlist_box">
+              {Object.keys(this.props.wishlist).map((key) => (
+                <Fish
+                  key={key}
+                  index={key}
+                  details={this.props.fishes[key]}
+                  addToOrder={this.addToOrder}
+                  addToWishlist={this.addToWishlist}
+                />
+              ))}
+            </ul>
+          ) : (
+            <div className="empty_text">
+              <h2>
+                You presently do not have any books in your wish list! Click on
+                the
+                <div className="heart_icon"></div>
+                to add books you are interested in saving for later!
+              </h2>
+            </div>
+          )}
         </div>
       </div>
     );

@@ -18,6 +18,13 @@ class EditFishForm extends React.Component {
     return (
       <div className="fish-edit">
         <input
+          name="Image"
+          type="text"
+          onChange={this.handleChange}
+          value={this.props.fish.image}
+        />
+
+        <input
           type="text"
           name="name"
           onChange={this.handleChange}
@@ -34,24 +41,26 @@ class EditFishForm extends React.Component {
           onChange={this.handleChange}
           value={this.props.fish.status}
         >
-          <option value="available">Fresh!</option>
+          <option value="available">In Stock</option>
           <option value="unavailable">Sold Out</option>
         </select>
-        <textarea
+
+        <input
           name="desc"
           onChange={this.handleChange}
           value={this.props.fish.desc}
-        ></textarea>
-
-        <input
-          name="Image"
-          type="text"
-          onChange={this.handleChange}
-          value={this.props.fish.image}
         />
+        {/* <textarea
+          name="desc"
+          onChange={this.handleChange}
+          value={this.props.fish.desc}
+       ></textarea> */}
 
-        <button onClick={() => this.props.deleteFish(this.props.index)}>
-          Remove Fish
+        <button
+          className="icon_button"
+          onClick={() => this.props.deleteFish(this.props.index)}
+        >
+          <div className="delete"></div>
         </button>
       </div>
     );

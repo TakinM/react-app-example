@@ -297,6 +297,12 @@ h6 {
 .icon_button:hover {
   all: none;
 }
+.delete {
+  background: url("images/delete.svg") center no-repeat;
+  background-size: contain;
+  height: 20px;
+  width: 20px;
+}
 .user_saves {
   display: -webkit-box;
   display: flex;
@@ -322,6 +328,20 @@ h6 {
   background-size: contain;
   height: 30px;
   width: 30px;
+  align-content: right;
+}
+.user_saves .exit {
+  background: url("images/cancel.svg") center no-repeat;
+  background-size: contain;
+  height: 30px;
+  width: 30px;
+  align-content: right;
+}
+.user_saves .add {
+  background: url("images/add.svg") center no-repeat;
+  background-size: contain;
+  height: 30px;
+  width: 30px;
 }
 .empty_text {
   padding: 60px;
@@ -340,6 +360,19 @@ h6 {
   font-family: proxima-nova, sans-serif;
   font-weight: 700;
   margin-left: 32%;
+}
+.mybutton:after {
+  content: '';
+  z-index: -1;
+  display: block;
+  background: #000;
+  position: absolute;
+  width: 100%;
+  height: 0;
+  left: 0;
+  top: 0;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
 .cart_icon {
   padding: 5px 0 5px 0;
@@ -457,6 +490,31 @@ header.top {
 .catch-of-the-day > *:last-child {
   width: calc(25% - 6.666666666666667px);
 }
+.adminlog {
+  display: -webkit-box;
+  display: flex;
+  height: 90vh;
+  margin: 0 auto;
+  padding: 0 10px 0 10px;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+}
+.adminlog > * {
+  padding: 2rem;
+  border: 1rem bold(#000, 10%);
+  position: relative;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+  overflow: scroll;
+}
+.adminlog > *:first-child {
+  width: calc(75% - 6.666666666666667px);
+  background: url("images/library_bg.jpg") center no-repeat;
+}
+.adminlog > *:last-child {
+  width: calc(25% - 6.666666666666667px);
+}
 ul {
   list-style: none;
   margin: 0;
@@ -508,7 +566,6 @@ ul.order li span.count span {
 }
 .fish-edit {
   margin-bottom: 20px;
-  border: 2px solid #000;
   overflow: hidden;
   display: -webkit-box;
   display: flex;
@@ -516,14 +573,10 @@ ul.order li span.count span {
 }
 .fish-edit input,
 .fish-edit textarea,
-.fish-edit select {
-  width: 33.33%;
+.fish-edit width 25% {
   padding: 10px;
-  line-height: 1;
-  font-size: 1.2rem;
+  height: 30px;
   border: 0;
-  border-bottom: 1px solid #000;
-  border-right: 1px solid #000;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -532,22 +585,22 @@ ul.order li span.count span {
 }
 .fish-edit input:focus,
 .fish-edit textarea:focus,
-.fish-edit select:focus {
+.fish-edit width 25%:focus {
   outline: 0;
   background: #fef2de;
 }
-.fish-edit textarea {
-  width: 100%;
+.fish-edit select {
+  width: 10%;
+  height: 30px;
 }
 .fish-edit input:last-of-type {
-  width: 100%;
+  width: 25%;
+  height: 30px;
 }
-/*.list-of-fish
-  border-top 2px solid black
-  border-bottom 1px solid black
-  padding-top 5px
-  margin-top 2rem
-  transform translateZ(0);*/
+.fish-edit input:nth-child(2) {
+  width: 35%;
+  height: 30px;
+}
 .menu .fishes {
   display: -webkit-box;
   display: flex;
@@ -630,20 +683,6 @@ button[disabled]:after,
 input[type=submit][disabled]:after {
   display: none;
 }
-button:after,
-input[type=submit]:after {
-  content: '';
-  z-index: -1;
-  display: block;
-  background: #000;
-  position: absolute;
-  width: 100%;
-  height: 0;
-  left: 0;
-  top: 0;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-}
 button:hover,
 input[type=submit]:hover,
 button:focus,
@@ -657,13 +696,58 @@ button:focus:after,
 input[type=submit]:focus:after {
   height: 100%;
 }
-button.warning:after,
-input[type=submit].warning:after {
-  background: #d12028;
+.cart_button,
+input[type=submit] {
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid #000;
+  font-weight: 600;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  position: relative;
+  z-index: 2;
 }
-button.success:after,
-input[type=submit].success:after {
-  background: #2dc22d;
+.cart_button[disabled],
+input[type=submit][disabled] {
+  color: #fff;
+  background: #d12028;
+  border-color: #d12028;
+}
+.cart_button:after,
+input[type=submit]:after {
+  content: '';
+  z-index: -1;
+  display: block;
+  background: #000;
+  position: absolute;
+  width: 100%;
+  height: 0;
+  left: 0;
+  top: 0;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.cart_button:after:hover,
+input[type=submit]:after:hover {
+  color: #d12028;
+  cursor: not-allowed;
+}
+.cart_button:after:after,
+input[type=submit]:after:after {
+  display: none;
+}
+.cart_button:hover,
+input[type=submit]:hover,
+.cart_button:focus,
+input[type=submit]:focus {
+  color: #fff;
+  outline: 0;
+}
+.cart_button:hover:after,
+input[type=submit]:hover:after,
+.cart_button:focus:after,
+input[type=submit]:focus:after {
+  height: 100%;
 }
 .account_panel {
   padding: 0;
@@ -675,6 +759,17 @@ input[type=submit].success:after {
 .account_panel .wishlist_view {
   background: url("images/wishlist_bg.jpg") center no-repeat;
   height: 60%;
+}
+.account_panel .wishlist_view .wishlist_box {
+  width: 80%;
+  margin: 30px 0 0 10%;
+}
+.account_panel .wishlist_view .wishlist_box li {
+  margin-bottom: 30px;
+  border: thick solid #fff;
+  background-color: #fff;
+  padding: 10px 10px 10px 10px;
+  box-shadow: 0 3px 15px;
 }
 .store-selector {
   background: #fff;
