@@ -310,6 +310,14 @@ h6 {
           justify-content: space-between;
   -webkit-box-align: center;
           align-items: center;
+  position: relative;
+}
+.user_saves .icon_button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
 }
 .user_saves .search {
   background: url("images/search.svg") center no-repeat;
@@ -329,6 +337,8 @@ h6 {
   height: 30px;
   width: 30px;
   align-content: right;
+  -webkit-box-flex: 1;
+          flex: 1;
 }
 .user_saves .exit {
   background: url("images/cancel.svg") center no-repeat;
@@ -511,9 +521,22 @@ header.top {
 .adminlog > *:first-child {
   width: calc(75% - 6.666666666666667px);
   background: url("images/library_bg.jpg") center no-repeat;
+  background-size: cover;
 }
 .adminlog > *:last-child {
   width: calc(25% - 6.666666666666667px);
+}
+.adminlog .fishes {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+.adminlog .fishes li {
+  margin-bottom: 70px;
+  width: calc(25% - 5px);
 }
 ul {
   list-style: none;
@@ -625,6 +648,33 @@ ul.order li span.count span {
   width: 100%;
 }
 .menu .fishes li .book_details {
+  border: thick solid #fff;
+  background-color: #fff;
+}
+.menu2 .fishes {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+.menu2 .fishes li {
+  margin-bottom: 70px;
+  width: calc(25% - 15px);
+}
+.menu2 .fishes li .books {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 198px;
+  border: thick solid #fff;
+}
+.menu2 .fishes li .books_cover {
+  box-shadow: 0 3px 15px;
+  width: 100%;
+}
+.menu2 .fishes li .book_details {
   border: thick solid #fff;
   background-color: #fff;
 }
@@ -758,7 +808,11 @@ input[type=submit]:focus:after {
 }
 .account_panel .wishlist_view {
   background: url("images/wishlist_bg.jpg") center no-repeat;
+  background-position: center;
   height: 60%;
+}
+.account_panel .wishlist_view.logged_in {
+  background: none;
 }
 .account_panel .wishlist_view .wishlist_box {
   width: 80%;

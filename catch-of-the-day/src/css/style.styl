@@ -24,6 +24,12 @@
   display flex
   justify-content space-between
   align-items center
+  position relative
+  .icon_button
+    position absolute
+    right 0
+    top 50%
+    transform translateY(-50%)
   .search
     background url('images/search.svg') center no-repeat;
     background-size contain
@@ -40,6 +46,7 @@
     height 30px
     width 30px
     align-content: right
+    flex 1
   .exit 
     background url('images/cancel.svg') center no-repeat;
     background-size contain
@@ -203,7 +210,6 @@ header.top
   padding 0 10px 0 10px
   justify-content space-between
   & > *
-    
     padding 2rem
     border 1rem  bold(black,10%)
     position relative
@@ -214,8 +220,18 @@ header.top
     &:first-child
       width calc(75% - 6.666666666666667px)
       background url('images/library_bg.jpg') center no-repeat;
+      background-size cover
     &:last-child
       width calc(25% - 6.666666666666667px)
+
+  .fishes
+    display flex
+    justify-content space-between
+    flex-wrap wrap
+    margin-top 30px
+    li
+      margin-bottom 70px
+      width calc(25% - 5px)
       
 
 // Folding Transforms
@@ -330,6 +346,35 @@ ul.order
         //margin-bottom: 90px
         background-color: white
 
+.menu2
+  .fishes
+    display flex
+    justify-content space-between
+    flex-wrap wrap
+    margin-top 30px
+    li
+      margin-bottom 70px
+      width calc(25% - 15px)
+      .books
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        height: 198px; 
+        //width: 306px
+        border: thick solid white
+        //margin-top: 27px
+        
+      .books_cover 
+        box-shadow: 0 3px 15px
+        width: 100%
+        //margin-left: 60px
+        
+        
+      .book_details
+        //width: 306px
+        border: thick solid white
+        //margin-bottom: 90px
+        background-color: white
 
         
 .menu-fish
@@ -430,7 +475,10 @@ button, input[type=submit]
     
   .wishlist_view
     background url('images/wishlist_bg.jpg') center no-repeat;
+    background-position: center;
     height 60%
+    &.logged_in
+      background none
     .wishlist_box
       width 80%
       margin: 30px 0 0 10%

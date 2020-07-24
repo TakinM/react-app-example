@@ -94,31 +94,61 @@ class Inventory extends React.Component {
           ) : null}
         </div>
 
-        <div className="wishlist_view">
-          <h6>WISHLIST</h6>
+        <div className={this.props.loggedIn ? "wishlist_view logged_in" : "wishlist_view"}>
+            {this.props.loggedIn ? (<h4>Yayy! You are logged in. Happy Editing!</h4>) : (
+              <React.Fragment>
+              <h6>WISHLIST</h6>
 
-          {this.props.wishlist && !_.isEmpty(this.props.fishes) ? (
-            <ul className="fishes wishlist_box">
-              {Object.keys(this.props.wishlist).map((key) => (
-                <Fish
-                  key={key}
-                  index={key}
-                  details={this.props.fishes[key]}
-                  addToOrder={this.addToOrder}
-                  addToWishlist={this.addToWishlist}
-                />
-              ))}
-            </ul>
-          ) : (
-            <div className="empty_text">
-              <h2>
-                You presently do not have any books in your wish list! Click on
-                the
-                <div className="heart_icon"></div>
-                to add books you are interested in saving for later!
-              </h2>
-            </div>
-          )}
+              {this.props.wishlist && !_.isEmpty(this.props.fishes) ? (
+                <ul className="fishes wishlist_box">
+                  {Object.keys(this.props.wishlist).map((key) => (
+                    <Fish
+                      key={key}
+                      index={key}
+                      details={this.props.fishes[key]}
+                      addToOrder={this.addToOrder}
+                      addToWishlist={this.addToWishlist}
+                    />
+                  ))}
+                </ul>
+              ) : (
+                <div className="empty_text">
+                  <h2>
+                    You presently do not have any books in your wish list! Click on
+                    the
+                    <div className="heart_icon"></div>
+                    to add books you are interested in saving for later!
+                  </h2>
+                </div>
+              )}
+
+
+              {/*{!this.props.wishlist && _.isEmpty(this.props.fishes) ? (
+                 <div className="empty_text">
+                 <h2>
+                   You presently do not have any books in your wish list! Click on
+                   the
+                   <div className="heart_icon"></div>
+                   to add books you are interested in saving for later!
+                 </h2>
+               </div>
+                
+              ) : (
+                <ul className="fishes wishlist_box">
+                  {Object.keys(this.props.wishlist).map((key) => (
+                    <Fish
+                      key={key}
+                      index={key}
+                      details={this.props.fishes[key]}
+                      addToOrder={this.addToOrder}
+                      addToWishlist={this.addToWishlist}
+                    />
+                  ))}
+                </ul>
+                  )}*/}
+              </React.Fragment>
+            )}
+          
         </div>
       </div>
     );

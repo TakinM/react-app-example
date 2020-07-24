@@ -148,7 +148,7 @@ class App extends React.Component {
 
         {this.state.loggedIn ? (
           <div className="adminlog">
-            <div className="menu">
+            <div className="menu2">
               <Header
                 loggedIn={this.state.loggedIn}
                 editing={this.state.editing}
